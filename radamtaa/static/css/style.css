@@ -1,0 +1,41 @@
+/* ##########footer############################ */
+
+.footer {
+    background-color: #190d03;
+    padding: 40px;
+    color: white;
+  }
+  
+  .footer .social-icons li,
+  .icon-left {
+    display: inline;
+    margin: 4px;
+    border: 1px solid #b8824f;
+    color: #fff;
+    background: #b8824f;
+    border-radius: 5px;
+    display: inline-block;
+    margin-right: 4px;
+    width: 40px;
+    height: 40px;
+    text-align: center;
+    line-height: 40px;
+  }
+  
+  .footer .social-icons li:hover {
+    border: 1px solid #b8824f;
+    background-color: transparent;
+  }
+  
+  .footer-list li {
+    list-style: none;
+    color: #ffffff;
+    font-size: 13px;
+    line-height: 2em;
+  }
+  
+  .contact-info a {
+    font-size: 13px;
+  }
+
+  /* ####################end footer############################### */
