@@ -20,6 +20,8 @@ import cloudinary
 import cloudinary.uploader
 import cloudinary.api
 
+import radamtaa
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 TEMPLATE_DIRS = (
@@ -57,6 +59,7 @@ cloudinary.config(
 INSTALLED_APPS = [
     'bootstrap5',
     'bootstrap4',
+    'radamtaa.apps.RadamtaaConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -81,7 +84,7 @@ ROOT_URLCONF = 'watch.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(SETTINGS_PATH, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -156,7 +159,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'Nairobi, Kenya'
+TIME_ZONE = 'Africa/Nairobi'
 
 USE_I18N = True
 
