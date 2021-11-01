@@ -10,6 +10,7 @@ urlpatterns = [
     path('landing/', views.LandingView.as_view() , name="landing"),
     path('profile/', views.profile , name="profile"),
     path('', views.userhome , name="index"),
+    path ('profile/update/', views.EditProfile, name="update"),
     ]
 
 if settings.DEBUG:

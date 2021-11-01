@@ -1,5 +1,20 @@
 {%extends "base.html" %}
 {%load bootstrap5%}
 {% block content%}
-<h1>{{user.username}}</h1>
+<div class="container">
+    <div class="content-section vh-100 d-flex align-items-center justify-content-center">
+        <div class="media d-flex">
+            <img class="rounded-circle account-img" src="{{user.profile.userpic.url}}" alt="ppic" height="300px" width="300px" style="border: 1px solid grey;border-radius: 50%;">
+            <div class="media-body">
+                <h2 class="account-heading">Username: {{ user.username }}</h2>
+                <p class="text-secondary">Email: {{ user.email }}</p>
+            </div>
+        </div>
+        <div class="">
+            <div class="">
+                <a class="btn btn-info" type="submit" href="{%url 'update' %}">Update</a>
+            </div>
+        </div>
+    </div>
+</div>
 {%endblock%}

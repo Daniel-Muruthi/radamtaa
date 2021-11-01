@@ -33,7 +33,6 @@ class Profile(models.Model):
         return self.user.username
 
 
-
     @classmethod
     def getProfileByName(cls, username):
         uprofile = cls.objects.filter(username=username)

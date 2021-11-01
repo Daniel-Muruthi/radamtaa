@@ -9,7 +9,7 @@ from django.views.generic import DetailView, FormView,UpdateView, CreateView, De
 from django.views import generic
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.contrib.auth.forms import UserCreationForm
-from .forms import SignUpForm
+from .forms import SignUpForm, ProfileUpdateForm, Profile
 
 class LandingView(TemplateView):
     template_name = 'landing.html'
@@ -33,3 +33,30 @@ def signup(request):
 @login_required
 def profile(request):
     return render(request, 'profile.html')
+
+
+@login_required
+def EditProfile(request):
+    profileform = ProfileUpdateForm(instance=request.user.userprofile)
+    pform = None
+    if request.method == 'POST':
+        profileform=ProfileUpdateForm(request.POST, request.FILES, instance=request.user.userprofile)
+
+        if profileform.is_valid():
+            pform=profileform.save(commit=False)
+            pform.user = request.user
+            pform.profile = profileform
+            pform.save()
+
+
+            return redirect('profile')
+
+        else:
+            profileform = ProfileUpdateForm(instance=request.user.userprofile)
+
+    context = {
+        'user': request.user,
+        'profileform': profileform, 
+        'pform':pform,
+    }
+    return render(request, 'profileedit.html', context)
