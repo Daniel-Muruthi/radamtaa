@@ -37,3 +37,48 @@ class Profile(models.Model):
     def getProfileByName(cls, username):
         uprofile = cls.objects.filter(username=username)
         return uprofile
+
+
+class Location(models.Model):
+    location=models.CharField(max_length=30)
+
+    objects = models.Manager()
+
+    def __str__(self):
+        return self.location
+
+class Mtaa(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE, null=True)
+    mtaapic = CloudinaryField("image")
+    name = models.CharField(max_length=150)
+    residents_number= models.PositiveIntegerField(default=0)
+    location = models.ForeignKey(Location)
+
+    @classmethod
+    def get_mtaa(cls):
+        mitaa = Mtaa.objects.all()
+        return mitaa
+
+    class Meta:
+        ordering = ['name']
+
+    @classmethod
+    def search_mtaa(cls,searchmtaa):
+        mitaa = cls.objects.filter(id__icontains = searchmtaa)
+        return mitaa
+
+class Posts(models.Model):
+	title = models.CharField(max_length = 300)
+	mtaa = models.ForeignKey(Mtaa)
+	author = models.ForeignKey(User, null=True)
+	content = models.TextField()
+
+	def __str__(self):
+		return self.title
+	def save_posts(self):
+		self.save()
+
+	def delete_posts(self):
+		self.delete()
+
+

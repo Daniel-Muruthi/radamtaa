@@ -32,6 +32,7 @@ def signup(request):
 
 @login_required
 def profile(request):
+    if 
     return render(request, 'profile.html')
 
 
