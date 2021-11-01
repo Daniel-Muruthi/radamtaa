@@ -8,6 +8,8 @@ from django.conf.urls.static import static
 
 urlpatterns = [
     path('landing/', views.LandingView.as_view() , name="landing"),
+    path('profile/', views.profile , name="profile"),
+    path('', views.userhome , name="index"),
     ]
 
 if settings.DEBUG:

@@ -39,3 +39,9 @@
   }
 
   /* ####################end footer############################### */
+
+  #bg{
+    background-image: url('css/nw.jpg');
+    background-repeat:no-repeat;
+    background-size:cover;
+  }

@@ -4,7 +4,6 @@
 <!doctype html>
 <html lang="en">
   <head>
-  	<title>Website menu 06</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
@@ -15,18 +14,38 @@
 	<link rel="stylesheet" href="css/style.css">
 
 	</head>
-	<body>
+	<body style="position:relative;" class="mb-3">
 	<section class="ftco-section">
 		<nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
 	    <div class="container">
-	    	<a class="navbar-brand" href="index.html">Papermag <span>Magazine</span></a>
+	    	<a class="navbar-brand" href="index.html">Rada <span>Mtaa</span></a>
             <div class="navbar navbar-nav navbar-right d-flex order-sm-start order-lg-last" style="display:flex !important;">
+				{%if user.is_authenticated %}
+				<div class="nav-item dropdown">
+					<div class="dropdown-menu" style="position:absolute !important;">
+						<a href="{%url 'profile'%}" class="dropdown-item">
+							<i class="fa fa-user-o"></i>
+							Profile
+						</a>
+						<a href="" class="dropdown-item">
+							<i class="fa fa-envelope"></i>
+							Messages
+						</a>
+						<div class="divider dropdown-divider"></div>
+						<a href="{%url 'logout'%}" class="dropdown-item">
+							<i class="fa fa-sign-out"></i>
+							Logout
+						</a>
+					</div>
+				</div>
+				{% else %}
                 <div class="my-auto mx-3 d-inline">
-                    <a href="" class="btn btn-outline-light ">Sign Up</a>
-                    <a href="" class="btn btn-outline-light">
+                    <a href="{%url 'signup'%}" class="btn btn-outline-light ">Sign Up</a>
+                    <a href="{%url 'signin'%}" class="btn btn-outline-light">
                         Log In
                     </a>
                 </div>
+				{%endif%}
             </div>
 	      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
 	        <span class="fa fa-bars"></span> Menu
@@ -35,14 +54,14 @@
 	        <ul class="navbar-nav m-auto">
 	        	<li class="nav-item active"><a href="#" class="nav-link">Home</a></li>
 	        	<li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Page</a>
-              <div class="dropdown-menu" aria-labelledby="dropdown04">
-              	<a class="dropdown-item" href="#">Page 1</a>
-                <a class="dropdown-item" href="#">Page 2</a>
-                <a class="dropdown-item" href="#">Page 3</a>
-                <a class="dropdown-item" href="#">Page 4</a>
-              </div>
-            </li>
+                <a class="nav-link dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Page</a>
+                <div class="dropdown-menu" aria-labelledby="dropdown04">
+              	  <a class="dropdown-item" href="#">Page 1</a>
+                  <a class="dropdown-item" href="#">Page 2</a>
+                  <a class="dropdown-item" href="#">Page 3</a>
+                  <a class="dropdown-item" href="#">Page 4</a>
+                </div>
+              </li>
 	        	<li class="nav-item"><a href="#" class="nav-link">Catalog</a></li>
 	        	<li class="nav-item"><a href="#" class="nav-link">Blog</a></li>
 	          <li class="nav-item"><a href="#" class="nav-link">Contact</a></li>

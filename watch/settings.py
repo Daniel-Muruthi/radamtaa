@@ -189,4 +189,6 @@ MEDIA_URL = '/media/'
 # Activate Django-Heroku.
 django_heroku.settings(locals())
 
-# LOGIN_REDIRECT_URL = 'index'
+LOGIN_REDIRECT_URL = 'index'
+
+LOGin_URL = 'signin'

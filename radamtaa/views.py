@@ -8,7 +8,28 @@ from django.urls import reverse, reverse_lazy
 from django.views.generic import DetailView, FormView,UpdateView, CreateView, DeleteView, TemplateView
 from django.views import generic
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
-# Create your views here.
+from django.contrib.auth.forms import UserCreationForm
+from .forms import SignUpForm
 
 class LandingView(TemplateView):
-    template_name = 'index.html'
+    template_name = 'landing.html'
+
+@login_required
+def userhome(request):
+    return render(request, 'index.html')
+
+def signup(request):
+    if request.method == "POST":
+        form = SignUpForm(request.POST)
+        if form.is_valid():
+            form.save()
+            username = form.cleaned_data.get('username')
+            messages.success(request, f'Account created for {username}')
+            return redirect('signin')
+    else:
+        form = SignUpForm()
+    return render(request, 'registration/signup.html', {'form':form})
+
+@login_required
+def profile(request):
+    return render(request, 'profile.html')
