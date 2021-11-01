@@ -19,17 +19,16 @@
 <div class="container-fluid">
     <div class="row">
         <div class="col-sm-12 d-flex" style="flex-wrap:wrap !important; justify-content:space-around;">
-            {% for project in posts %}
+            {% for mtaa in mitaa %}
             <div class="card d-flex flex-column col-sm-3 mx-1 my-2" style="height:800px;">
-                <img src="{{project.userpic.url}}" alt="projectpic" height="400px">
+                <img src="{{mtaa.mtaapic.url}}" alt="mtaapic" height="400px">
                 <h2 class="text-center">Title</h2>
-                <h5 class="text-center my-2">{{project.title}}</h5>
-                <h2 class="text-center">Description</h2>
-                <h6>" {{project.description|truncatechars:70}}  "</h6>
+                <h5 class="text-center my-2">{{mtaa.name}}</h5>
+                <h6>"Location: {{mtaa.location}}  "</h6>
                 <div class="d-flex justify-content-around mt-auto">
                     <p class="mt-auto">
-                        <a class="btn mt-auto btn-outline-primary" href="{%url 'findpost' project.id %}">
-                            Click to View ...
+                        <a class="btn mt-auto btn-outline-primary" href="">
+                            Join Mtaa
                         </a>
                     </p>
                     <h5><a href="{%url 'addcomment' project.pk %}" class="btn btn-success">Add Comment</a></h5>

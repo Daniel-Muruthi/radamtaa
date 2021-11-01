@@ -19,7 +19,8 @@ class LandingView(TemplateView):
 
 @login_required
 def userhome(request):
-    return render(request, 'index.html')
+    neighbourhoods = Mtaa.get_mtaa()
+    return render(request, 'index.html', {"mitaa":neighbourhoods})
 
 def signup(request):
     if request.method == "POST":
