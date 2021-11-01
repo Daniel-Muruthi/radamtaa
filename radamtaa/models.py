@@ -14,6 +14,7 @@ from django.db.models.signals import post_save
 from django.core.exceptions import ObjectDoesNotExist
 from django.db.models.signals import post_save
 from django.dispatch import receiver
+from django import forms
 
 GENDER_CHOICES = (
    ('M', 'Male'),
@@ -27,10 +28,14 @@ class Profile(models.Model):
     bio = models.CharField(blank=True,max_length=255)
     houselocation = models.CharField(blank=True,max_length=255)
     userpic = CloudinaryField('image')
-    gender = models.CharField(max_length=11, choices=GENDER_CHOICES, default='Male')
+    gender = models.CharField(choices=GENDER_CHOICES, max_length=11,  default='Male')
 
     def __str__(self):
         return self.user.username
+
+
+    class Meta:
+        ordering = ('-user',)
 
 
     @classmethod
@@ -53,7 +58,8 @@ class Mtaa(models.Model):
     name = models.CharField(max_length=150)
     residents_number= models.PositiveIntegerField(default=0)
     location = models.ForeignKey(Location, on_delete=models.CASCADE)
-
+ 
+ 
     @classmethod
     def get_mtaa(cls):
         mitaa = Mtaa.objects.all()

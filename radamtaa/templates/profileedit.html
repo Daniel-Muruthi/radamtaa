@@ -1,9 +1,11 @@
+{% extends "base.html" %}
+{% load widget_tweaks %}
 {% block content %}
-    <div class="container w-50 mx-auto my-3">
-        <h4 class="text-center">ACCOUNT SETTINGS</h4>
-        <form method="post" enctype="multipart/form-data">{% csrf_token %}
+    <div class="container w-50 mx-auto my-3 card">
+        <h4 class="text-center">EDIT PROFILE</h4>
+        <form method="post" enctype="multipart/form-data" action="{%url 'update' object.user.id%}">
+            {% csrf_token %}
             <form enctype="multipart/form-data" method="post">{% csrf_token %}
-        {% load widget_tweaks %}
 
         {% if messages %}
             {% for message in messages %}
@@ -12,13 +14,12 @@
         {% endif %}
 
         <div class="form-group">
-            <label for="{{ form.username_for_label }}">Username:</label>
-            {{ form.user.username|add_class:"form-control" }}
+            <label for="{{ form.userpic_for_label }}">Upload Your Profile Picture:</label>
+            {{ form.userpic|add_class:"form-file-control" }}
         </div>
-
         <div class="form-group">
-            <label for="{{ form.email_for_label }}">Email:</label>
-            {{ form.email|add_class:"form-control" }}
+            <label for="{{ form.username_for_label }}">Username:</label>
+            {{ form.user|add_class:"form-control" }}
         </div>
 
         <div class="form-group">
@@ -27,7 +28,7 @@
         </div>
 
         <div class="form-group">
-            <label for="{{ form.email_for_label }}">Your Email:</label>
+            <label for="{{ form.email_for_label }}">Email:</label>
             {{ form.email|add_class:"form-control" }}
         </div>
 
@@ -36,10 +37,6 @@
             {{ form.bio|add_class:"form-control" }}
         </div>
 
-        <div class="form-group">
-            <label for="{{ form.userpic_for_label }}">Upload Your Profile Picture:</label>
-            {{ form.userpic|add_class:"form-file-control" }}
-        </div>
 
         <div class="form-group">
             <label for="{{ form.gender_for_label }}">Gender:</label>
@@ -47,7 +44,8 @@
         </div>
 
         <div class="container text-center w-50">
-            <input type="submit" class="btn-lg btn-secondary" value="UPDATE SETTINGS">
+            <a href="" class="btn btn-success" type="submit">UPDATE</a>
+            <!-- <input type="submit" class="btn-lg btn-outline-success my-3" value="UPDATE SETTINGS"> -->
         </div>
 
     </form>

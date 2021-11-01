@@ -1,7 +1,7 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
-from .models import Profile
+from .models import Mtaa, Profile
 
 
 class SignUpForm(UserCreationForm):
@@ -37,4 +37,11 @@ class ProfileUpdateForm(forms.ModelForm):
 
     class Meta:
         model = Profile
-        fields = ['userpic','user', 'email', 'phonenumber', 'bio', 'gender']
+        fields = ['userpic', 'houselocation','user', 'email', 'phonenumber', 'bio', 'gender']
+
+class MtaaForm(forms.ModelForm):
+     
+
+     class Meta:
+         model=Mtaa
+         fields = ['user','mtaapic', 'name', 'residents_number', 'location']

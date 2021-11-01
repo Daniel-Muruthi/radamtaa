@@ -8,8 +8,11 @@ from django.urls import reverse, reverse_lazy
 from django.views.generic import DetailView, FormView,UpdateView, CreateView, DeleteView, TemplateView
 from django.views import generic
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
+from django.contrib.messages.views import SuccessMessageMixin
 from django.contrib.auth.forms import UserCreationForm
-from .forms import SignUpForm, ProfileUpdateForm, Profile
+
+from radamtaa.models import Mtaa
+from .forms import MtaaForm, SignUpForm, ProfileUpdateForm, Profile
 
 class LandingView(TemplateView):
     template_name = 'landing.html'
@@ -30,34 +33,51 @@ def signup(request):
         form = SignUpForm()
     return render(request, 'registration/signup.html', {'form':form})
 
-@login_required
-def profile(request):
+class MyProfile(DetailView):
+    model = Profile
+    template_name = 'profile.html'
 
-    return render(request, 'profile.html')
+    def get_object(self):
+        return self.request.user.profile
 
 
-@login_required
-def EditProfile(request):
-    profileform = ProfileUpdateForm(instance=request.user.profile)
-    pform = None
+# class MtaaView(CreateView):
+#     model = Mtaa
+#     form_class= MtaaForm
+#     template_name = 'mtaa.html'
+#     success_url = reverse_lazy('index')
+
+#     def get_object(self):
+#         return self.request.user.mtaa
+
+def mtaaview(request):
+    current_user= request.user
     if request.method == 'POST':
-        profileform=ProfileUpdateForm(request.POST, request.FILES, instance=request.user.profile)
+        form = MtaaForm(request.POST, request.FILES)
+        if form.is_valid():
+            mtaa = form.save(commit=False)
+            mtaa.user = current_user
+            mtaa.save()
+            messages.success(request, 'You Have succesfully added your Mtaa. You may now Join It')
+        return redirect('index')
+    else:
+        form = MtaaForm()
+    return render(request, 'mtaa.html', {"form": form})
 
-        if profileform.is_valid():
-            pform=profileform.save(commit=False)
-            pform.user = request.user
-            pform.profile = profileform
-            pform.save()
+class UpdateProfile(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
+    model = Profile
+    fields = ['userpic', 'houselocation','user', 'email', 'phonenumber', 'bio', 'gender']
+    template_name = 'profileedit.html'
+    # form_class = ProfileUpdateForm
+    success_url = reverse_lazy('profile')
 
+    def get_object(self):
+        return self.request.user.profile
 
-            return redirect('profile')
+    def get_success_url(self):
+        messages.add_message(self.request, messages.INFO, 'Your Account Settings were updated successfully!')
+        return reverse('profile')
 
-        else:
-            profileform = ProfileUpdateForm(instance=request.user.profile)
-
-    context = {
-        'user': request.user,
-        'profileform': profileform, 
-        'pform':pform,
-    }
-    return render(request, 'profileedit.html', context)
+    # def get_queryset(self, *args, **kwargs):
+        
+    #     return Profile.objects.filter(id=self.kwargs['pk'])

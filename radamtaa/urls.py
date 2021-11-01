@@ -8,9 +8,10 @@ from django.conf.urls.static import static
 
 urlpatterns = [
     path('landing/', views.LandingView.as_view() , name="landing"),
-    path('profile/', views.profile , name="profile"),
+    path('profile/', views.MyProfile.as_view() , name="profile"),
     path('', views.userhome , name="index"),
-    path ('profile/update/', views.EditProfile, name="update"),
+    path ('profile/update/<int:pk>/', views.UpdateProfile.as_view(), name="update"),
+    path('addmtaa/', views.mtaaview, name="addmtaa"),
     ]
 
 if settings.DEBUG:
