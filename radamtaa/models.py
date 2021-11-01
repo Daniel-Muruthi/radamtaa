@@ -52,7 +52,7 @@ class Mtaa(models.Model):
     mtaapic = CloudinaryField("image")
     name = models.CharField(max_length=150)
     residents_number= models.PositiveIntegerField(default=0)
-    location = models.ForeignKey(Location)
+    location = models.ForeignKey(Location, on_delete=models.CASCADE)
 
     @classmethod
     def get_mtaa(cls):
@@ -69,8 +69,8 @@ class Mtaa(models.Model):
 
 class Posts(models.Model):
 	title = models.CharField(max_length = 300)
-	mtaa = models.ForeignKey(Mtaa)
-	author = models.ForeignKey(User, null=True)
+	mtaa = models.ForeignKey(Mtaa, on_delete=models.CASCADE)
+	author = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
 	content = models.TextField()
 
 	def __str__(self):

@@ -32,16 +32,16 @@ def signup(request):
 
 @login_required
 def profile(request):
-    if 
+
     return render(request, 'profile.html')
 
 
 @login_required
 def EditProfile(request):
-    profileform = ProfileUpdateForm(instance=request.user.userprofile)
+    profileform = ProfileUpdateForm(instance=request.user.profile)
     pform = None
     if request.method == 'POST':
-        profileform=ProfileUpdateForm(request.POST, request.FILES, instance=request.user.userprofile)
+        profileform=ProfileUpdateForm(request.POST, request.FILES, instance=request.user.profile)
 
         if profileform.is_valid():
             pform=profileform.save(commit=False)
@@ -53,7 +53,7 @@ def EditProfile(request):
             return redirect('profile')
 
         else:
-            profileform = ProfileUpdateForm(instance=request.user.userprofile)
+            profileform = ProfileUpdateForm(instance=request.user.profile)
 
     context = {
         'user': request.user,
