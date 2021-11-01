@@ -21,21 +21,41 @@
 	    	<a class="navbar-brand" href="index.html">Rada <span>Mtaa</span></a>
             <div class="navbar navbar-nav navbar-right d-flex order-sm-start order-lg-last" style="display:flex !important;">
 				{%if user.is_authenticated %}
-				<div class="nav-item dropdown">
-					<div class="dropdown-menu" style="position:absolute !important;">
-						<a href="{%url 'profile'%}" class="dropdown-item">
-							<i class="fa fa-user-o"></i>
-							Profile
-						</a>
-						<a href="" class="dropdown-item">
-							<i class="fa fa-envelope"></i>
-							Messages
-						</a>
-						<div class="divider dropdown-divider"></div>
-						<a href="{%url 'logout'%}" class="dropdown-item">
-							<i class="fa fa-sign-out"></i>
-							Logout
-						</a>
+				<div class="navbar navbar-nav navbar-right d-inline">
+					<div class="d-flex">
+						<div class="nav-item dropdown mx-3" >
+							<a href=""  class="nav-link dropdown-toggle user-action" data-bs-toggle="dropdown">
+								<img src="" class="avatar" alt="Avatar" style="height:50px; width:50px; border-radius: 50%;">
+								<h5 class="d-inline">{{ user.username }} </h5>
+								<!-- <b class="caret"></b> -->
+							</a>
+							<div class="dropdown-menu" style="position:absolute !important;">
+								<a href="{%url 'profile'%}" class="dropdown-item">
+									<i class="fa fa-user-o"></i>
+									Profile
+								</a>
+								<a href="" class="dropdown-item">
+									<i class="fa fa-envelope"></i>
+									Messages
+								</a>
+								<div class="divider dropdown-divider"></div>
+								<a href="{%url 'logout'%}" class="dropdown-item">
+									<i class="fa fa-sign-out"></i>
+									Logout
+								</a>
+							</div>
+							<div class="dropdown-menu" style="position:absolute !important;">
+								<a href="{%url 'signin' %}" class="dropdown-item">
+									<i class="fa fa-envelope"></i>
+									Log In
+								</a>
+								<div class="divider dropdown-divider"></div>
+								<a href="{%url 'signup'%}" class="dropdown-item">
+									<i class="fa fa-sign-out"></i>
+									Sign Up
+								</a>
+							</div> 
+						</div>
 					</div>
 				</div>
 				{% else %}
