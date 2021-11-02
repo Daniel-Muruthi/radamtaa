@@ -18,8 +18,8 @@ class LandingView(TemplateView):
     template_name = 'landing.html'
 
 @login_required
-def userhome(request):
-    neighbourhoods = Mtaa.get_mtaa()
+def userhome(request, **kwargs):
+    neighbourhoods = Mtaa.get_mtaa().order_by('-pub_date')
     return render(request, 'index.html', {"mitaa":neighbourhoods})
 
 def signup(request):
@@ -51,6 +51,11 @@ class MyProfile(DetailView):
 #     def get_object(self):
 #         return self.request.user.mtaa
 
+#     form= MtaaForm
+#     def form_valid(self, form):
+#         form.instance.name = self.request.user
+#         return super().form_valid(form)
+
 def mtaaview(request):
     current_user= request.user
     if request.method == 'POST':
@@ -58,9 +63,10 @@ def mtaaview(request):
         if form.is_valid():
             mtaa = form.save(commit=False)
             mtaa.user = current_user
+            mtaa.mtaa = form
             mtaa.save()
             messages.success(request, 'You Have succesfully added your Mtaa. You may now Join It')
-        return redirect('index')
+            return HttpResponseRedirect('index')
     else:
         form = MtaaForm()
     return render(request, 'mtaa.html', {"form": form})

@@ -58,6 +58,7 @@ class Mtaa(models.Model):
     name = models.CharField(max_length=150)
     residents_number= models.PositiveIntegerField(default=0)
     location = models.ForeignKey(Location, on_delete=models.CASCADE)
+    pub_date = models.DateTimeField(auto_now_add=True, null=True)
  
  
     @classmethod
@@ -74,17 +75,18 @@ class Mtaa(models.Model):
         return mitaa
 
 class Posts(models.Model):
-	title = models.CharField(max_length = 300)
-	mtaa = models.ForeignKey(Mtaa, on_delete=models.CASCADE)
-	author = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
-	content = models.TextField()
+    pub_date = models.DateTimeField(auto_now_add=True, null=True) 
+    title = models.CharField(max_length = 300)
+    mtaa = models.ForeignKey(Mtaa, on_delete=models.CASCADE)
+    author = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
+    content = models.TextField()
 
-	def __str__(self):
-		return self.title
-	def save_posts(self):
-		self.save()
+    def __str__(self):
+	    return self.title
+    def save_posts(self):
+	    self.save()
 
-	def delete_posts(self):
-		self.delete()
+    def delete_posts(self):
+	    self.delete()
 
 

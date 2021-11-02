@@ -12,11 +12,11 @@
       <div class="col-sm-12 card">
         <div class="vh-100 d-flex flex-column align-items-center justify-content-center my-5 mx-auto col-sm-7">
           <h1>Add Mtaa</h1>
-          <form  action="{%url 'addmtaa'%}" method="POST" enctype="multipart/form-data">
+          <form  action="{%url 'addmtaa'%}" method="post" enctype="multipart/form-data">
             {%csrf_token%}
           
-            <!-- {% bootstrap_form form %} -->
-            <div class="form-group">
+            {% bootstrap_form form %}
+            <!-- <div class="form-group">
                 <label for="{{ form.mtaapic_for_label }}">Upload Your Mtaa Picture:</label>
                 {{ form.mtaapic|add_class:"form-file-control" }}
             </div>
@@ -34,7 +34,7 @@
             <div class="form-group">
                 <label for="{{ form.location_for_label }}">Location:</label>
                 {{ form.location|add_class:"form-control" }}
-            </div>
+            </div> -->
 
             <input type="submit" class="btn btn-success btn-lg" value="Post">
           </form>
@@ -42,5 +42,9 @@
       </div>
     </div>
   </div>
+  {% block scripts %}
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
+   {% bootstrap_javascript %}
+{% endblock %}
 {%endblock%}
