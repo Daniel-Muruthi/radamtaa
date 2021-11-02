@@ -1,0 +1,19 @@
+                      List of relations
+ Schema |            Name            | Type  |     Owner      
+--------+----------------------------+-------+----------------
+ public | auth_group                 | table | qtnjwogugrvvja
+ public | auth_group_permissions     | table | qtnjwogugrvvja
+ public | auth_permission            | table | qtnjwogugrvvja
+ public | auth_user                  | table | qtnjwogugrvvja
+ public | auth_user_groups           | table | qtnjwogugrvvja
+ public | auth_user_user_permissions | table | qtnjwogugrvvja
+ public | django_admin_log           | table | qtnjwogugrvvja
+ public | django_content_type        | table | qtnjwogugrvvja
+ public | django_migrations          | table | qtnjwogugrvvja
+ public | django_session             | table | qtnjwogugrvvja
+ public | radamtaa_location          | table | qtnjwogugrvvja
+ public | radamtaa_mtaa              | table | qtnjwogugrvvja
+ public | radamtaa_posts             | table | qtnjwogugrvvja
+ public | radamtaa_profile           | table | qtnjwogugrvvja
+(14 rows)
+
