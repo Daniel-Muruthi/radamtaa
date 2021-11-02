@@ -41,7 +41,9 @@
   /* ####################end footer############################### */
 
   #bg{
-    background-image: url('/radamtaa/static/images/nw.jpg');
+    background-image: url('{{ STATIC_URL }}/images/nw.jpg');
     background-repeat:no-repeat;
     background-size:cover;
+    height:"100vh";
+    width:"100vw";
   }

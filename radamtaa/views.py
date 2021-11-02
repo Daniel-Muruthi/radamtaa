@@ -63,7 +63,7 @@ def mtaaview(request):
         if form.is_valid():
             mtaa = form.save(commit=False)
             mtaa.user = current_user
-            mtaa.mtaa = form
+            mtaa.profile = form
             mtaa.save()
             messages.success(request, 'You Have succesfully added your Mtaa. You may now Join It')
             return HttpResponseRedirect('index')
