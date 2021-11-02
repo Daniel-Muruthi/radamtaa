@@ -7,9 +7,9 @@ from . import views
 from django.conf.urls.static import static
 
 urlpatterns = [
-    path('landing/', views.LandingView.as_view() , name="landing"),
+    path('', views.LandingView.as_view() , name="landing"),
     path('profile/', views.MyProfile.as_view() , name="profile"),
-    path('', views.userhome , name="index"),
+    path('home/', views.userhome , name="index"),
     path ('profile/update/<int:pk>/', views.UpdateProfile.as_view(), name="update"),
     path('addmtaa/', views.mtaaview, name="addmtaa"),
     ]
