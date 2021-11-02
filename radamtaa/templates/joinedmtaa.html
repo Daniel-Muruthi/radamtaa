@@ -1,0 +1,77 @@
+{% extends "base.html" %}
+{% block content%}
+{% load bootstrap5 %}
+<div class="container">
+    <div class="row">
+        <div class="col-sm-12 d-flex" style="flex-wrap:wrap !important; justify-content:space-around;">
+            <div class="card flex-column my-2" style="height:800px;">
+                <img src="{{project.userpic.url}}" alt="projectpic" height="400px">
+                <!-- <h2 class="text-center">Title</h2> -->
+                <h5 class="text-center my-2">{{project.title}}</h5>
+                <div class="my-3" style="border: 1px solid rgb(218, 218, 218); width:80%; height:1px; align-self:center;"></div>
+                
+                <h2 class="text-center">Description</h2>
+                <div class="my-3" style="border: 1px solid rgb(218, 218, 218); width:80%; height:1px; align-self:center;"></div>
+                <h6 class="my-4" style="height:fit-content">" {{project.description}}  "</h6>
+
+                <div class="d-flex justify-content-around">
+                    <p class="mt-auto">
+                        <a class="btn mt-auto btn-outline-primary" href="{{project.livelink}}" target='_blank'>
+                            View Deployment
+                        </a>
+                    </p>
+                    <h5><a href="{%url 'addcomment' project.pk %}" class="btn btn-success">Add Comment</a></h5>
+                    <form action="{%url 'likeproject' project.id%}" method='POST'>
+                        {%csrf_token%}
+                        <button type="submit" value="project.id", id="likebutton" name='likeid' class="btn btn-success">
+                            <i class="fas fa-thumbs-up">{{project.likecount}} Likes</i>
+                        </button>
+                    </form>
+                </div>
+                <h5 class="mt-auto my-3">Project By: {{project.name}}</h5>
+                <!-- <div class="section">
+                    <div class="">
+                        <form method="POST" action="">
+                            {% csrf_token %}
+                            <div class="form-group">
+                                {% bootstrap_form form layout='inline'%}
+                            </div>
+                            <button class="btn btn-primary" type=submit>Comment</button>
+                        </form>
+                    </div>
+                </div> -->
+                <div>
+                    <h4 class="text-center">Comments...</h4>
+                    <hr>
+                    {% if not project.comments.all %}
+                        No Comments Yet...<a href="{%url 'addcomment' project.id %}">Add One</a>
+                    {% else %}
+                        {% for comment in project.comments.all%}
+                        <div class="d-flex scroll" style=" background-color: rgba(9, 134, 9, 0.5);
+                        height: fit-content;
+                        overflow-x: hidden;
+                        overflow-y: auto;
+                        text-align:justify;">
+                            <div>
+                                <img src="{{user.userprofile.userpic.url}}" class="avatar" alt="Avatar" style="height:50px; width:50px; border-radius: 50%;">
+                            </div>
+                            <div>
+                                <strong>
+                                    {{comment.user}}
+                                    {{comment.date}}
+                                </strong>
+                                <div>
+                                    {{ comment.comment }}
+                                    <br>
+                                </div>
+                            </div>
+                        </div>
+                        <hr>
+                        {%endfor%}
+                    {%endif%}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{%endblock%}
