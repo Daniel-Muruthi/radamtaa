@@ -155,9 +155,9 @@ def EditProfile(request):
 
 
 ################################################
-def CommentPost(request, pk):
-    project = get_object_or_404(Mtaa, pk=pk)
-    comments = project.comments.filter(id = pk)
+def CommentPost(request, pk, **kwargs):
+    mtaa = get_object_or_404(Mtaa, pk=pk)
+    comments = mtaa.comments.filter(id = pk)
     comment = None
 
     if request.method == 'POST':
@@ -165,10 +165,10 @@ def CommentPost(request, pk):
         if form.is_valid():
             comment= form.save(commit=False)
             comment.user = request.user
-            comment.project = project
+            comment.mtaa = mtaa
             comment.save()
             return redirect('index')
 
     else:
         form = CommentsForm()
-    return render(request, 'addcomment.html', {'comments':comment, 'comments': comments, 'form':form, 'project':project, 'id':pk})
+    return render(request, 'addcomment.html', {'comments':comment, 'comments': comments, 'form':form, 'mtaa':mtaa, 'id':pk})
