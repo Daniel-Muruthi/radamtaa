@@ -10,7 +10,7 @@ urlpatterns = [
     path('', views.LandingView.as_view() , name="landing"),
     path('profile/', views.MyProfile.as_view() , name="profile"),
     path('home/', views.userhome , name="index"),
-    path ('profile/update/<int:pk>/', views.UpdateProfile.as_view(), name="update"),
+    path ('profile/update/', views.EditProfile, name="update"),
     path('addmtaa/', views.mtaaview, name="addmtaa"),
     ]
 

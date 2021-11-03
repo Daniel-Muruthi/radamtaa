@@ -99,4 +99,26 @@ class Posts(models.Model):
     def delete_posts(self):
 	    self.delete()
 
+class Comment(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE, null=True,)
+    comment = models.TextField(null=True)
+    date = models.DateField(auto_now_add=True, null=True)
+    mtaa = models.ForeignKey('Mtaa', related_name="comments", on_delete=models.CASCADE, null=True,)
 
+
+    objects = models.Manager()
+
+    class Meta:
+        ordering = ("date",)
+
+    def __str__(self):
+        return self.user.username
+    def get_absolute_url(self):
+        return reverse('addcomment')
+
+    @classmethod
+    def show_projects(cls):
+        comments = cls.objects.all()
+        return comments
+    def savecomment(self):
+        self.save()

@@ -11,7 +11,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.contrib.messages.views import SuccessMessageMixin
 from django.contrib.auth.forms import UserCreationForm
 
-from radamtaa.models import Mtaa
+from radamtaa.models import Mtaa, Comment, Profile, Posts, Location
 from .forms import MtaaForm, SignUpForm, ProfileUpdateForm, Profile
 
 class LandingView(TemplateView):
@@ -88,3 +88,67 @@ class UpdateProfile(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
     # def get_queryset(self, *args, **kwargs):
         
     #     return Profile.objects.filter(id=self.kwargs['pk'])
+
+
+class FindMtaaView(DetailView):
+    model = Mtaa
+    template_name = 'joinedmtaa.html'
+    slug_field = "slug"
+
+    form = MtaaForm
+
+    def form_valid(self, form):
+        form.instance.author = self.request.user
+        return super().form_valid(form)
+
+    def mtaa(self, request, *args, **kwargs):
+        form = MtaaForm(request.POST)
+        if form.is_valid():
+            mtaa = self.get_object()
+            form.instance.user = request.user
+            form.instance.mtaa = mtaa
+            form.save()
+
+            return redirect(reverse('mtaa', kwargs={"form":form, 'slug':mtaa.slug}))
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["form"] = self.form
+        return context
+    
+    def get_context_data(self, **kwargs):
+        post_comments_count = Comment.objects.all().filter(comment=self.object.id).count()
+        post_comments = Comment.objects.all().filter(comment=self.object.id)
+        context = super().get_context_data(**kwargs)
+        context.update({
+            'form': self.form,
+            'post_comments': post_comments,
+            'post_comments_count': post_comments_count,
+        })
+        return context
+    
+@login_required
+def EditProfile(request):
+    profileform = ProfileUpdateForm(instance=request.user.profile)
+    pform = None
+    if request.method == 'POST':
+        profileform=ProfileUpdateForm(request.POST, request.FILES, instance=request.user.profile)
+
+        if profileform.is_valid():
+            pform=profileform.save(commit=False)
+            pform.user = request.user
+            pform.profile = profileform
+            pform.save()
+
+
+            return redirect('profile')
+
+        else:
+            profileform = ProfileUpdateForm(instance=request.user.profile)
+
+    context = {
+        'user': request.user,
+        'profileform': profileform, 
+        'pform':pform,
+    }
+    return render(request, 'profileedit.html', context)
