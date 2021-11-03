@@ -21,7 +21,7 @@
           <p>There are no comments for this project</p>
           {% endfor %}
           <h1>Create Post</h1>
-          <form  action="{%url 'addcomment' project.id%}" method="POST" enctype="multipart/form-data">
+          <form  action="{%url 'addcomment' mtaa.id%}" method="POST" enctype="multipart/form-data">
             {%csrf_token%}
           
             {% bootstrap_form form %}

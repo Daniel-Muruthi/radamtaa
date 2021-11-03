@@ -1,7 +1,7 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
-from .models import Mtaa, Profile
+from .models import Mtaa, Profile, Comment
 
 
 class SignUpForm(UserCreationForm):
@@ -45,3 +45,10 @@ class MtaaForm(forms.ModelForm):
      class Meta:
          model=Mtaa
          fields = ['user','mtaapic', 'name', 'residents_number', 'location']
+
+
+class CommentsForm(forms.ModelForm):
+    comment = forms.CharField(widget=forms.Textarea(attrs={'rows':'4', 'placeholder': 'enter your comment'}))
+    class Meta:
+        model=Comment
+        fields= ['user', 'comment']

@@ -11,6 +11,8 @@ urlpatterns = [
     path('profile/', views.MyProfile.as_view() , name="profile"),
     path('home/', views.userhome , name="index"),
     path ('profile/update/', views.EditProfile, name="update"),
+    path('project/<int:pk>/', views.FindMtaaView.as_view(), name='findpost'),
+    path('project/<int:pk>/addcomment/', views.CommentPost, name='addcomment'),
     path('addmtaa/', views.mtaaview, name="addmtaa"),
     ]
 

@@ -4,8 +4,8 @@
 <div class="container">
     <div class="row">
         <div class="col-sm-12 d-flex" style="flex-wrap:wrap !important; justify-content:space-around;">
-            <div class="card flex-column my-2" style="height:800px;">
-                <img src="{{mtaa.mtaapic.url}}" alt="mtaapic" height="400px">
+            <div class="card flex-column my-2" style="height:900px; width:70%;">
+                <img src="{{mtaa.mtaapic.url}}" alt="mtaapic" height="600px">
                 <!-- <h2 class="text-center">Title</h2> -->
                 <h5 class="text-center my-2">{{mtaa.name}}</h5>
                 <div class="my-3" style="border: 1px solid rgb(218, 218, 218); width:80%; height:1px; align-self:center;"></div>
@@ -20,15 +20,9 @@
                             View Deployment
                         </a>
                     </p> -->
-                    <h5><a href="{%url 'addcomment' mtaa.pk %}" class="btn btn-success">Add Comment</a></h5>
-                    <form action="{%url 'likeproject' mtaa.id%}" method='POST'>
-                        {%csrf_token%}
-                        <button type="submit" value="mtaa.id", id="likebutton" name='likeid' class="btn btn-success">
-                            <i class="fas fa-thumbs-up">{{mtaa.likecount}} Likes</i>
-                        </button>
-                    </form>
+                    <a class="btn btn-success" id="complain" href="{%url 'addcomment' mtaa.pk %}"><i class="fa fa-plus" aria-hidden="true"></i> Add Post</a>
                 </div>
-                <h5 class="mt-auto my-3">Project By: {{mtaa.name}}</h5>
+                <h5 class="mt-auto my-3">Project By: {{mtaa.user.username}}</h5>
                 <!-- <div class="section">
                     <div class="">
                         <form method="POST" action="">

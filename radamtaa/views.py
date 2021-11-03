@@ -12,7 +12,7 @@ from django.contrib.messages.views import SuccessMessageMixin
 from django.contrib.auth.forms import UserCreationForm
 
 from radamtaa.models import Mtaa, Comment, Profile, Posts, Location
-from .forms import MtaaForm, SignUpForm, ProfileUpdateForm, Profile
+from .forms import MtaaForm, SignUpForm, ProfileUpdateForm, Profile,CommentsForm
 
 class LandingView(TemplateView):
     template_name = 'landing.html'
@@ -152,3 +152,23 @@ def EditProfile(request):
         'pform':pform,
     }
     return render(request, 'profileedit.html', context)
+
+
+################################################
+def CommentPost(request, pk):
+    project = get_object_or_404(Mtaa, pk=pk)
+    comments = project.comments.filter(id = pk)
+    comment = None
+
+    if request.method == 'POST':
+        form = CommentsForm(request.POST)
+        if form.is_valid():
+            comment= form.save(commit=False)
+            comment.user = request.user
+            comment.project = project
+            comment.save()
+            return redirect('index')
+
+    else:
+        form = CommentsForm()
+    return render(request, 'addcomment.html', {'comments':comment, 'comments': comments, 'form':form, 'project':project, 'id':pk})
