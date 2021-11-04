@@ -38,7 +38,7 @@
                     <h4 class="text-center">Comments...</h4>
                     <hr>
                     {% if not mtaa.comments.all %}
-                        No Comments Yet...<a href="{%url 'addcomment' mtaa.id %}">Add One</a>
+                        No Comments Yet...<a href="{%url 'addcomment' user.mtaa.id %}">Add One</a>
                     {% else %}
                         {% for comment in mtaa.comments.all%}
                         <div class="d-flex scroll" style=" background-color: rgba(9, 134, 9, 0.5);
@@ -47,7 +47,7 @@
                         overflow-y: auto;
                         text-align:justify;">
                             <div>
-                                <img src="{{user.mtaa.mtaapic.url}}" class="avatar" alt="Avatar" style="height:50px; width:50px; border-radius: 50%;">
+                                <img src="{{user.profile.userpic.url}}" class="avatar" alt="Avatar" style="height:50px; width:50px; border-radius: 50%;">
                             </div>
                             <div>
                                 <strong>
