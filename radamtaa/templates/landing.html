@@ -15,15 +15,11 @@
         <title>Document</title>
     </head>
     
-    {% block 'content'%}
+    {% block content%}
     <body id="bg" class="" style="background-image: url('{% static "images/nw.jpg" %}'); background-repeat:no-repeat; background-size:cover; ">
         <div class="container">
-            <div class="vh-100 d-flex align-items-center justify-content-center content-section" style="display:flex; flex-direction: column;">
-                <div class="border-top pt-3">
-                    <small class="text-muted">
-                        <a class="ml-2" href="{%url 'signin' %}">Log In Again</a>
-                    </small>
-                </div>
+            <div class="vh-100 d-flex align-items-center justify-content-center content-section" style="background-size:cover;">
+                <img class="vh-100 d-flex align-items-center justify-content-center content-section" src="{%static 'images/nb.png' %}" style="width:100vw; overflow-x: hidden;">
             </div>
         </div>   
     </body>

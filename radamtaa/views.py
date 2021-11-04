@@ -17,6 +17,9 @@ from .forms import MtaaForm, SignUpForm, ProfileUpdateForm, Profile,CommentsForm
 class LandingView(TemplateView):
     template_name = 'landing.html'
 
+def landingview(request):
+    return render(request, 'landing.html')
+
 @login_required
 def userhome(request, **kwargs):
     neighbourhoods = Mtaa.get_mtaa().order_by('-pub_date')
