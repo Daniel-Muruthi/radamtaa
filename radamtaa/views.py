@@ -96,7 +96,6 @@ class UpdateProfile(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
 class FindMtaaView(DetailView):
     model = Mtaa
     template_name = 'joinedmtaa.html'
-    slug_field = "slug"
 
     form = MtaaForm
 
@@ -112,7 +111,7 @@ class FindMtaaView(DetailView):
             form.instance.mtaa = mtaa
             form.save()
 
-            return redirect(reverse('mtaa', kwargs={"form":form, 'slug':mtaa.slug, 'id':pk}))
+            return redirect(reverse('mtaa', kwargs={"form":form, 'id':mtaa.pk}))
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -174,4 +173,4 @@ def CommentPost(request, pk, **kwargs):
 
     else:
         form = CommentsForm()
-    return render(request, 'addcomment.html', {'comments':comment, 'comments': comments, 'form':form, 'mtaa':mtaa, 'id':pk})
+    return render(request, 'addcomment.html', {'comments':comment, 'comments': comments, 'form':form, 'mtaa':mtaa, 'id':mtaa.pk})

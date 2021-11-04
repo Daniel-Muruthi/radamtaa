@@ -117,7 +117,7 @@ class Comment(models.Model):
         return reverse('addcomment')
 
     @classmethod
-    def show_projects(cls):
+    def show_comments(cls):
         comments = cls.objects.all()
         return comments
     def savecomment(self):
