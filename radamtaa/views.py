@@ -104,7 +104,7 @@ class FindMtaaView(DetailView):
         form.instance.author = self.request.user
         return super().form_valid(form)
 
-    def mtaa(self, request, *args, **kwargs):
+    def mtaa(self, request, pk, *args, **kwargs):
         form = MtaaForm(request.POST)
         if form.is_valid():
             mtaa = self.get_object()
@@ -112,7 +112,7 @@ class FindMtaaView(DetailView):
             form.instance.mtaa = mtaa
             form.save()
 
-            return redirect(reverse('mtaa', kwargs={"form":form, 'slug':mtaa.slug}))
+            return redirect(reverse('mtaa', kwargs={"form":form, 'slug':mtaa.slug, 'id':pk}))
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
